@@ -1,0 +1,307 @@
+
+assets.png
+size: 1024, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+bg
+  rotate: false
+  xy: 2, 102
+  size: 200, 400
+  orig: 200, 400
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 1012, 492
+  size: 8, 10
+  orig: 8, 10
+  offset: 0, 0
+  index: -1
+bullet_blue
+  rotate: false
+  xy: 944, 242
+  size: 4, 8
+  orig: 4, 8
+  offset: 0, 0
+  index: -1
+cursor
+  rotate: false
+  xy: 994, 284
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+effect
+  rotate: false
+  xy: 2, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+enemy_moth
+  rotate: false
+  xy: 910, 184
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+enemy_orb
+  rotate: false
+  xy: 910, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+enemy_spider
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+explosion
+  rotate: false
+  xy: 810, 252
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 1
+explosion
+  rotate: false
+  xy: 68, 52
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 6
+explosion
+  rotate: false
+  xy: 810, 202
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 3
+explosion
+  rotate: false
+  xy: 860, 252
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 8
+explosion
+  rotate: false
+  xy: 118, 52
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 0
+explosion
+  rotate: false
+  xy: 810, 152
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
+explosion
+  rotate: false
+  xy: 860, 202
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 2
+explosion
+  rotate: false
+  xy: 910, 252
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 7
+explosion
+  rotate: false
+  xy: 810, 102
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 4
+explosion
+  rotate: false
+  xy: 860, 152
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 9
+hand
+  rotate: false
+  xy: 204, 302
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 406, 100
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+powerups
+  rotate: false
+  xy: 508, 74
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 2
+powerups
+  rotate: false
+  xy: 534, 74
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+powerups
+  rotate: false
+  xy: 560, 74
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 3
+powerups
+  rotate: false
+  xy: 586, 74
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+ship
+  rotate: false
+  xy: 474, 67
+  size: 32, 31
+  orig: 32, 31
+  offset: 0, 0
+  index: -1
+ship_sketch
+  rotate: false
+  xy: 236, 67
+  size: 32, 31
+  orig: 32, 31
+  offset: 0, 0
+  index: -1
+tentacles
+  rotate: false
+  xy: 406, 302
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: 4
+tentacles
+  rotate: false
+  xy: 608, 302
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: 1
+tentacles
+  rotate: false
+  xy: 810, 302
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: 3
+tentacles
+  rotate: false
+  xy: 204, 100
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: 0
+tentacles
+  rotate: false
+  xy: 608, 100
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: 2
+thrusters
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 8
+thrusters
+  rotate: false
+  xy: 168, 68
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+thrusters
+  rotate: false
+  xy: 960, 268
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+thrusters
+  rotate: false
+  xy: 860, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+thrusters
+  rotate: false
+  xy: 270, 66
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 7
+thrusters
+  rotate: false
+  xy: 304, 66
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+thrusters
+  rotate: false
+  xy: 338, 66
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 9
+thrusters
+  rotate: false
+  xy: 372, 66
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+thrusters
+  rotate: false
+  xy: 406, 66
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 6
+thrusters
+  rotate: false
+  xy: 440, 66
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+wing
+  rotate: false
+  xy: 910, 151
+  size: 32, 31
+  orig: 32, 31
+  offset: 0, 0
+  index: -1
+wing_sketch
+  rotate: false
+  xy: 202, 67
+  size: 32, 31
+  orig: 32, 31
+  offset: 0, 0
+  index: -1

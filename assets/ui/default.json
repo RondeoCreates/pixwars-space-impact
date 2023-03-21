@@ -1,0 +1,43 @@
+{
+BitmapFont: {
+	font: {
+		file: font.fnt
+		scaledSize: -1
+		markupEnabled: true
+		flip: false
+	}
+	upheavtt: {
+		file: upheavtt.fnt
+		scaledSize: -1
+		markupEnabled: true
+		flip: false
+	}
+}
+LabelStyle: {
+	default: {
+		font: font
+	}
+	big: {
+		font: upheavtt
+	}
+}
+TextButtonStyle: {
+	default: {
+		font: font
+		up: button
+		down: button_down
+		over: button
+	}
+}
+TextTooltipStyle: {
+	default: {
+		label: default
+	}
+}
+WindowStyle: {
+	default: {
+		background: window
+		titleFont: upheavtt
+	}
+}
+}
