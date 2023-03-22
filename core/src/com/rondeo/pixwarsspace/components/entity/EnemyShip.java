@@ -35,6 +35,8 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
         @Override
         public Response filter( Item item, Item other ) {
             if( other.userData instanceof Bullet && !((Bullet) other.userData).isDead && ((Bullet) other.userData).top ) {
+                if( invulnerable )
+                    return null;
                 isHit = System.currentTimeMillis() + 100;
                 bullet = (Bullet) other.userData;
                 bullet.forceFree();
@@ -59,6 +61,7 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
     float screenWidth, screenHeight;
     long time;
     boolean isDead = true;
+    public boolean invulnerable = true;
     long isHit;
     
     public EnemyShip( World<Entity> world, Array<AtlasRegion> explosionRegions ) {
@@ -72,6 +75,7 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
     public void init( AtlasRegion shipRegion, float[] pattern ) {
         this.shipRegion = shipRegion;
         life = 4;
+        invulnerable = true;
         screenWidth = getStage().getWidth();
         screenHeight = getStage().getHeight();
 
@@ -81,11 +85,13 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
         clearActions();
         SequenceAction sequenceAction = new SequenceAction();
         for( int x = 0; x < pattern.length - 1; x += 2 ) {
-            int y = x + 1;
+            final int y = x + 1;
             sequenceAction.addAction( Actions.moveTo( (pattern[x] * screenWidth) - getWidth()/2f, (pattern[y] * screenHeight) - getHeight()/2f, .5f ) );
             sequenceAction.addAction( new Action() {
                 @Override
-                public boolean act(float delta) {
+                public boolean act( float delta ) {
+                    if( y > 4 )
+                        invulnerable = false;
                     if( getStage() != null )
                         Controllers.getInstance().bulletController.fire( getStage(), ( getX() + getWidth()/2f ) - Bullet.width/2, getY() + 5f, 0, 0, false );
                     return true;

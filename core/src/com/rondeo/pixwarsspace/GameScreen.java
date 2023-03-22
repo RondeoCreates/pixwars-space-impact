@@ -39,15 +39,18 @@ public class GameScreen extends ScreenAdapter {
         stage = new Stage( new FitViewport( main.width, main.height, camera = new OrthographicCamera() ) );
         assets = new TextureAtlas( Gdx.files.internal( "assets.atlas" ) );
         
-        world = new World<>( 3f );
+        world = new World<>( 1f );
+        world.setTileMode( false );
 
         ship = new Ship( world );
         ship.setRegions( assets.findRegion( "ship" ), assets.findRegion( "wing" ), assets.findRegion( "ship_sketch" ), assets.findRegion( "wing_sketch" ), assets.findRegions( "thrusters" ), assets.findRegion( "effect" ) );
-        background = new Background( main.width, main.height, ship );
+        background = new Background( main.width, main.height, ship, assets );
 
         Controllers.getInstance().init( world, camera, assets, ship );
-        outbound[0] = new Outbound( world, -200, main.height + 1, main.width + 400, 20 );
-        outbound[1] = new Outbound( world, -200, -21, main.width + 400, 20 );
+        outbound[0] = new Outbound( world, 0, main.height + 1, main.width, 10 );
+        outbound[1] = new Outbound( world, 0, -11, main.width, 10 );
+        outbound[2] = new Outbound( world, -11, 0, 10, main.height );
+        outbound[3] = new Outbound( world, main.width + 1, 0, 10, main.height );
 
         stage.addActor( background );
         stage.addActor( ship );
@@ -107,8 +110,10 @@ public class GameScreen extends ScreenAdapter {
         
         stage.getViewport().update( width, height, true );
         hudManager.hud.getViewport().update( width, height, true );
-        outbound[0].update( -200, height + 1, width + 400, 20 );
-        outbound[0].update( -200, -21, width + 400, 20 );
+        outbound[0].update( 0, height + 1, width, 10 );
+        outbound[1].update( 0, -11, width, 10 );
+        outbound[2].update( -11, 0, 10, height );
+        outbound[3].update( width + 1, 0, 10,height );
         background.setBounds( 0, 0, width, height );
     }
 
