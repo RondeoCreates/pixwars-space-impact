@@ -43,7 +43,7 @@ public class PowerUpController implements Disposable {
                 powerUp = powerPool.obtain();
                 stage.addActor( powerUp );
                 powerUp.init( powerRegion[index], index, x, y );
-                activePowerUps.add( powerUp );
+                //activePowerUps.add( powerUp );
             }
         }
     }
@@ -51,7 +51,7 @@ public class PowerUpController implements Disposable {
     public void forceFree( PowerUp item ) {
         powerPool.free( item );
         item.dispose();
-        activePowerUps.removeValue( item, false );
+        //activePowerUps.removeValue( item, false );
     }
 
     @Override

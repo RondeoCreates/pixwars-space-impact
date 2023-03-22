@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
 import com.dongbat.jbump.World;
+import com.rondeo.pixwarsspace.components.Controllers;
 import com.rondeo.pixwarsspace.components.Entity;
 import com.rondeo.pixwarsspace.components.entity.EnemyShip;
 
@@ -119,13 +120,13 @@ public class EnemyController extends Actor implements Entity, Disposable {
         stage.addActor( enemyShip );
         //System.out.println( patterns.get( choosenPatternIndex ) );
         enemyShip.init( enemyRegion[choosenRegionIndex], patterns_1[ choosenPatternIndex ] );
-        activeEnemies.add( enemyShip );
+        //activeEnemies.add( enemyShip );
 
         // Deploy second
         enemyShip = enemyPool.obtain();
         stage.addActor( enemyShip );
         enemyShip.init( enemyRegion[choosenRegionIndex], patterns_2[ choosenPatternIndex ] );
-        activeEnemies.add( enemyShip );
+        //activeEnemies.add( enemyShip );
     }
     
     public Action deployAction = new Action() {
@@ -140,7 +141,7 @@ public class EnemyController extends Actor implements Entity, Disposable {
         deploySequence = new SequenceAction();
         choosenRegionIndex = random.nextInt( regionLength );
         choosenPatternIndex = random.nextInt( patterns_1.length );
-        for( int i = 0; i < 12; i ++ ) {
+        for( int i = 0; i < 8; i ++ ) {
             deploySequence.addAction( Actions.delay( .3f ) );
             deploySequence.addAction( deployAction );
         }
@@ -152,7 +153,7 @@ public class EnemyController extends Actor implements Entity, Disposable {
     public void act( float delta ) {
         super.act(delta);
 
-        if( activeEnemies.size < 8 ) {
+        if( activeEnemies.size < 8 && !Controllers.getInstance().bossController().boss ) {
             if( System.currentTimeMillis() > time + 10000 ) {
                 addAction( deployShips() );
                 time = System.currentTimeMillis();
@@ -163,7 +164,7 @@ public class EnemyController extends Actor implements Entity, Disposable {
     public void forceFree( EnemyShip item ) {
         enemyPool.free( item );
         item.dispose();
-        activeEnemies.removeValue( item, false );
+        //activeEnemies.removeValue( item, false );
     }
 
     @Override

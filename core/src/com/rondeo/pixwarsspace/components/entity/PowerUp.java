@@ -76,7 +76,7 @@ public class PowerUp extends Actor implements Entity, Disposable, Poolable {
     }
 
     public void forceFree() {
-        Controllers.getInstance().powerUpController.forceFree( this );
+        Controllers.getInstance().powerUpController().forceFree( this );
     }
 
     @Override

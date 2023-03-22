@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.dongbat.jbump.CollisionFilter;
 import com.dongbat.jbump.Item;
+import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.Response;
 import com.dongbat.jbump.World;
 import com.rondeo.pixwarsspace.components.Controllers;
@@ -23,6 +24,7 @@ import com.rondeo.pixwarsspace.components.controllers.SoundController;
 public class Ship extends Entity.Wrapper implements Entity, Disposable, InputProcessor {
     World<Entity> world;
     Item<Entity> item;
+    Rect rect;
 
     AtlasRegion baseRegion, wingRegion, base_sketchRegion, wing_sketchRegion, effectRegion;
     Animation<AtlasRegion> thrusterAnimation;
@@ -84,16 +86,16 @@ public class Ship extends Entity.Wrapper implements Entity, Disposable, InputPro
         super.act( delta );
         deltaTime += delta;
         world.move( item, getX(), getY(), collisionFilter );
-
+        resolve();
         if( System.currentTimeMillis() > time + 100 && ( !Controllers.getInstance().gameOver && !Controllers.getInstance().pause ) ) {
             time = System.currentTimeMillis();
             if( hasWings > System.currentTimeMillis() ) {
-                Controllers.getInstance().bulletController.fire( getStage(), getX() - Bullet.width/2, getTop() - 5f, -.5f, 0, true );
-                Controllers.getInstance().bulletController.fire( getStage(), getRight() - Bullet.width/2, getTop() - 5f, .5f, 0, true );
+                Controllers.getInstance().bulletController().fire( getStage(), getX() - Bullet.width/2, getTop() - 5f, -.5f, 0, true );
+                Controllers.getInstance().bulletController().fire( getStage(), getRight() - Bullet.width/2, getTop() - 5f, .5f, 0, true );
 
-                Controllers.getInstance().bulletController.fire( getStage(), (getX() + getWidth()/2f) - Bullet.width/2, getTop() - 5f, 0, 0, true );
+                Controllers.getInstance().bulletController().fire( getStage(), (getX() + getWidth()/2f) - Bullet.width/2, getTop() - 5f, 0, 0, true );
             } else {
-                Controllers.getInstance().bulletController.fire( getStage(), (getX() + getWidth()/2f) - Bullet.width/2, getTop() - 5f, 0, 0, true );
+                Controllers.getInstance().bulletController().fire( getStage(), (getX() + getWidth()/2f) - Bullet.width/2, getTop() - 5f, 0, 0, true );
             }
         }
 
@@ -135,6 +137,11 @@ public class Ship extends Entity.Wrapper implements Entity, Disposable, InputPro
         batch.draw( thrusterAnimation.getKeyFrame( deltaTime ), getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation() );
     }
 
+    public void resolve() {
+        rect = world.getRect( item );
+        setBounds( rect.x, rect.y, rect.w, rect.h );
+    }
+
     @Override
     public void dispose() { }
 
@@ -166,7 +173,7 @@ public class Ship extends Entity.Wrapper implements Entity, Disposable, InputPro
         ray = getStage().getViewport().getPickRay( screenX, screenY );
         ray.getEndPoint( endPoint, 0f );
         x = MathUtils.clamp( endPoint.x - getWidth()/2f, 0, getStage().getViewport().getWorldWidth() - getWidth() );
-        y = MathUtils.clamp( endPoint.y, 20, getStage().getViewport().getWorldHeight()/2f );
+        y = MathUtils.clamp( endPoint.y, 20, getStage().getViewport().getWorldHeight() - 200f );
         addAction( Actions.moveTo( x, y, .2f ) );
         return true;
     }

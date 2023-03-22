@@ -42,3 +42,11 @@ window
   orig: 32, 32
   offset: 0, 0
   index: -1
+window_red
+  rotate: false
+  xy: 515, 603
+  size: 32, 32
+  split: 5, 5, 5, 5
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

@@ -16,7 +16,6 @@ import com.rondeo.pixwarsspace.components.Controllers;
 import com.rondeo.pixwarsspace.components.Entity;
 import com.rondeo.pixwarsspace.components.HudManager;
 import com.rondeo.pixwarsspace.components.Outbound;
-import com.rondeo.pixwarsspace.components.controllers.BossController;
 import com.rondeo.pixwarsspace.components.controllers.SoundController;
 import com.rondeo.pixwarsspace.components.entity.Ship;
 
@@ -39,12 +38,12 @@ public class GameScreen extends ScreenAdapter {
         stage = new Stage( new FitViewport( main.width, main.height, camera = new OrthographicCamera() ) );
         assets = new TextureAtlas( Gdx.files.internal( "assets.atlas" ) );
         
-        world = new World<>( 1f );
-        world.setTileMode( false );
+        world = new World<Entity>( 4f );
+        //world.setTileMode( false );
 
         ship = new Ship( world );
         ship.setRegions( assets.findRegion( "ship" ), assets.findRegion( "wing" ), assets.findRegion( "ship_sketch" ), assets.findRegion( "wing_sketch" ), assets.findRegions( "thrusters" ), assets.findRegion( "effect" ) );
-        background = new Background( main.width, main.height, ship, assets );
+        background = new Background( main.width, main.height, ship );
 
         Controllers.getInstance().init( world, camera, assets, ship );
         outbound[0] = new Outbound( world, 0, main.height + 1, main.width, 10 );
@@ -54,11 +53,9 @@ public class GameScreen extends ScreenAdapter {
 
         stage.addActor( background );
         stage.addActor( ship );
-        stage.addActor( Controllers.getInstance().enemyController );
-
-        BossController bossController = new BossController( world, assets.findRegions( "tentacles" ), assets.findRegion( "head" ), assets.findRegion( "hand" ) );
-        stage.addActor( bossController );
-        bossController.setup();
+        stage.addActor( Controllers.getInstance().enemyController() );
+        stage.addActor( Controllers.getInstance().bossController() );
+        Controllers.getInstance().bossController().setup();
         
         hudManager = new HudManager( main, assets );
 
@@ -67,6 +64,8 @@ public class GameScreen extends ScreenAdapter {
         inputMultiplexer.addProcessor( stage );
         inputMultiplexer.addProcessor( hudManager.hud );
         Gdx.input.setInputProcessor( inputMultiplexer );
+
+        stage.setDebugAll( true );
     }
 
     @Override
@@ -99,8 +98,10 @@ public class GameScreen extends ScreenAdapter {
 
         if( Gdx.input.isKeyJustPressed( Keys.P ) ) {
             Controllers.getInstance().pause = !Controllers.getInstance().pause;
-            System.out.println( Controllers.getInstance().pause );
-            System.out.println( world.countItems() + "<>" + world.countCells() );
+        }
+
+        if( Gdx.input.isKeyPressed( Keys.L ) ) {
+            System.out.println( world.countItems() + "<>" + world.countCells() + " = " + Gdx.graphics.getFramesPerSecond() );
         }
     }
 
@@ -114,7 +115,7 @@ public class GameScreen extends ScreenAdapter {
         outbound[1].update( 0, -11, width, 10 );
         outbound[2].update( -11, 0, 10, height );
         outbound[3].update( width + 1, 0, 10,height );
-        background.setBounds( 0, 0, width, height );
+        //background.setBounds( 0, 0, width, height );
     }
 
 

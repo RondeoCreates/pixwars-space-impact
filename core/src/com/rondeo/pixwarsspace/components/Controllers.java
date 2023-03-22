@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.dongbat.jbump.World;
+import com.rondeo.pixwarsspace.components.controllers.BossController;
 import com.rondeo.pixwarsspace.components.controllers.BulletController;
 import com.rondeo.pixwarsspace.components.controllers.CameraController;
 import com.rondeo.pixwarsspace.components.controllers.EnemyController;
@@ -14,10 +15,11 @@ import com.rondeo.pixwarsspace.components.controllers.PowerUpController;
 import com.rondeo.pixwarsspace.components.entity.Ship;
 
 public class Controllers implements Disposable {
-    public BulletController bulletController;
-    public EnemyController enemyController;
-    public CameraController cameraController;
-    public PowerUpController powerUpController;
+    private BulletController bulletController;
+    private EnemyController enemyController;
+    private CameraController cameraController;
+    private PowerUpController powerUpController;
+    private BossController bossController;
     public boolean gameOver = false;
     public boolean pause = false;
     public int tutorial = -1;
@@ -34,6 +36,7 @@ public class Controllers implements Disposable {
         bulletController = new BulletController( world, assets.findRegion( "bullet_blue" ), assets.findRegion( "bullet" ) );
         enemyController = new EnemyController( world, assets.findRegions( "explosion" ), 3, assets.findRegion( "enemy_orb" ), assets.findRegion( "enemy_spider" ), assets.findRegion( "enemy_moth" ) );
         powerUpController = new PowerUpController( world, assets.findRegions( "powerups" ).toArray() );
+        bossController = new BossController( world, assets.findRegions( "tentacles" ), assets.findRegions( "explosion" ), assets.findRegion( "head" ), assets.findRegion( "left_hand" ), assets.findRegion( "right_hand" ), assets.findRegion( "laser_left" ), assets.findRegion( "laser_right" ), assets.findRegion( "laser_head" ) );
 
         preferences = Gdx.app.getPreferences( "pixwars-space-impact" );
         return this;
@@ -47,6 +50,7 @@ public class Controllers implements Disposable {
     public void dispose() {
         enemyController.dispose();
         bulletController.dispose();
+        bossController.dispose();
     }
 
     public static synchronized Controllers getInstance() {
@@ -92,6 +96,23 @@ public class Controllers implements Disposable {
                 ship.effect = System.currentTimeMillis() + 3000;
                 break;
         }
+    }
+
+    public BulletController bulletController() {
+        return bulletController;
+    }
+
+    public EnemyController enemyController(){
+        return enemyController;
+    }
+    public CameraController cameraController() {
+        return cameraController;
+    }
+    public PowerUpController powerUpController() {
+        return powerUpController;
+    }
+    public BossController bossController() {
+        return bossController;
     }
 
 }

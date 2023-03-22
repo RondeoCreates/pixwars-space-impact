@@ -79,8 +79,9 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
         screenWidth = getStage().getWidth();
         screenHeight = getStage().getHeight();
 
-        setBounds( pattern[0] * screenWidth, pattern[1] * screenHeight, width, height );
+        //setBounds( pattern[0] * screenWidth, pattern[1] * screenHeight, width, height );
         world.update( item, pattern[0] * screenWidth, pattern[1] * screenHeight, width, height );
+        resolve();
         isDead = false;
         clearActions();
         SequenceAction sequenceAction = new SequenceAction();
@@ -93,7 +94,7 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
                     if( y > 4 )
                         invulnerable = false;
                     if( getStage() != null )
-                        Controllers.getInstance().bulletController.fire( getStage(), ( getX() + getWidth()/2f ) - Bullet.width/2, getY() + 5f, 0, 0, false );
+                        Controllers.getInstance().bulletController().fire( getStage(), ( getX() + getWidth()/2f ) - Bullet.width/2, getY() + 5f, 0, 0, false );
                     return true;
                 }
             } );
@@ -129,7 +130,7 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
         super.act(delta);
 
         world.move( item, getX(), getY(), collisionFilter );
-        
+        resolve();
         if( life <= 0 ) {
             if( !SoundController.getInstance().explosion.isPlaying() )
                 SoundController.getInstance().explosion.play();
@@ -137,7 +138,7 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
             clearActions();
             isDead = true;
             deltaTime = 0;
-            Controllers.getInstance().powerUpController.pop( getStage(), ((random.nextInt(8) + 1)*0.1f) * getStage().getWidth()/*(getX() + getWidth()/2f) + PowerUp.width/2f*/, /*(getY() + getHeight()/2f)*/ getStage().getHeight() + PowerUp.height/2f );
+            Controllers.getInstance().powerUpController().pop( getStage(), ((random.nextInt(8) + 1)*0.1f) * getStage().getWidth()/*(getX() + getWidth()/2f) + PowerUp.width/2f*/, /*(getY() + getHeight()/2f)*/ getStage().getHeight() + PowerUp.height/2f );
             return;
         }
 
@@ -175,16 +176,21 @@ public class EnemyShip extends Actor implements Entity, Disposable, Poolable {
     }
 
     public void forceFree() {
-        Controllers.getInstance().enemyController.forceFree( this );
+        Controllers.getInstance().enemyController().forceFree( this );
     }
 
     @Override
     public void reset() {
         clearActions();
         isDead = true;
-        setPosition( -100, -100 );
         world.update( item, -100, -100 );
+        resolve();
         remove();
+    }
+
+    public void resolve() {
+        rect = world.getRect( item );
+        setBounds( rect.x, rect.y, rect.w, rect.h );
     }
 
 }

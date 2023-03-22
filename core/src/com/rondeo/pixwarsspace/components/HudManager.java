@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -12,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
@@ -26,6 +29,7 @@ public class HudManager implements Disposable {
     Table table;
     TextureAtlas assets;
     TutorialManager tutorialManager;
+    WarningManager warningManager;
     int tutType = -1;
 
     public HudManager( final Main main, TextureAtlas assets ) {
@@ -71,12 +75,17 @@ public class HudManager implements Disposable {
         hud.addActor( table );
 
         tutorialManager = new TutorialManager();
+        warningManager = new WarningManager();
     }
 
     public void update() {
         hud.getViewport().apply();
         hud.act();
         hud.draw();
+
+        if( !Controllers.getInstance().bossController().boss && System.currentTimeMillis() > Controllers.getInstance().bossController().timeStart ) {
+            warningManager.show();
+        }
     }
 
     public void gameOver() {
@@ -87,10 +96,46 @@ public class HudManager implements Disposable {
         tutorialManager.show( Controllers.getInstance().tutorial );
     }
 
+    public void showWarning() {
+        warningManager.show();
+    }
+
     @Override
     public void dispose() {
         hud.dispose();
         skin.dispose();
+    }
+
+    private class WarningManager {
+        Window window;
+        boolean showing = false;
+
+        public WarningManager() {
+            window = new Window( "", skin.get( "window_red", WindowStyle.class ) );
+            window.pad( 15f );
+            window.setVisible( false );
+            window.setModal( true );
+            window.setSize( hud.getWidth(), 200 );
+            window.setPosition( 0, hud.getHeight()/2f - window.getHeight()/2f );
+
+            Label warninLabel = new Label( "BOSS", skin.get( "big", LabelStyle.class ) );
+            window.add( warninLabel );
+
+            hud.addActor( window );
+        }
+
+        public void show() {
+            if( showing )
+                return;
+            window.setVisible( true );
+            window.addAction(
+                Actions.sequence( 
+                    Actions.repeat( 4, Actions.sequence( Actions.visible( true ), Actions.delay( .8f ), Actions.visible( false ), Actions.delay( .2f ) ) ),
+                    Actions.visible( false )
+                )
+            );
+            showing = true;
+        }
     }
 
     private class TutorialManager {

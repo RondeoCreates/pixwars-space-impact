@@ -13,6 +13,8 @@ import com.dongbat.jbump.World;
 import com.rondeo.pixwarsspace.components.Controllers;
 import com.rondeo.pixwarsspace.components.Entity;
 import com.rondeo.pixwarsspace.components.Outbound;
+import com.rondeo.pixwarsspace.components.controllers.BossController;
+import com.rondeo.pixwarsspace.components.controllers.SoundController;
 
 public class Bullet extends Actor implements Entity, Disposable, Poolable {
     World<Entity> world;
@@ -24,7 +26,22 @@ public class Bullet extends Actor implements Entity, Disposable, Poolable {
         public Response filter(Item item, Item other) {
             if( other.userData instanceof Outbound ) {
                 forceFree();
-            }// else if( other.userData instanceof Bullet && ((Bullet)other.userData).top != top ) {
+                return null;
+            }
+            if( other.userData instanceof BossController.BossParts && top ) {
+                BossController.BossParts part = (BossController.BossParts) other.userData;
+                if( part.life > 0 ) {
+                    if( part.isHit + 100 < System.currentTimeMillis() ) {
+                        part.isHit = System.currentTimeMillis() + 100;
+                        SoundController.getInstance().hurt.play();
+                        part.reduceLife();
+                        forceFree();
+                    }
+                    //forceFree();
+                }
+            }
+            
+            // else if( other.userData instanceof Bullet && ((Bullet)other.userData).top != top ) {
             //    forceFree();
             //}
             return null;
@@ -49,9 +66,9 @@ public class Bullet extends Actor implements Entity, Disposable, Poolable {
     }
 
     public void init( float x, float y, boolean top ) {
-        setBounds( x, y, width, height );
-        world.update( item, x, y, width, height );
         isDead = false;
+        world.update( item, x, y, width, height );
+        resolve();
         this.top = top;
     }
 
@@ -60,10 +77,10 @@ public class Bullet extends Actor implements Entity, Disposable, Poolable {
         if( isDead )
             return;
         super.act(delta);
-        
+        //moveBy( dirX, ( (top ? 100 : -100) * delta) + dirY );
         world.move( item, getX() + dirX, getY() + ( (top ? 300 : -300) * delta) + dirY, collisionFilter );
-        rect = world.getRect( item );
-        setBounds( rect.x, rect.y, rect.w, rect.h );
+        //world.move( item, getX(), getY(), collisionFilter );
+        resolve();
     }
 
     @Override
@@ -81,15 +98,20 @@ public class Bullet extends Actor implements Entity, Disposable, Poolable {
     }
 
     public void forceFree() {
-        Controllers.getInstance().bulletController.forceFree( this );
+        Controllers.getInstance().bulletController().forceFree( this );
     }
 
     @Override
     public void reset() {
         isDead = true;
-        setPosition( -10, -10 );
         world.update( item, -10, -10 );
+        resolve();
         remove();
+    }
+
+    public void resolve() {
+        rect = world.getRect( item );
+        setBounds( rect.x, rect.y, rect.w, rect.h );
     }
 
 }

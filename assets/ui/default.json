@@ -39,5 +39,9 @@ WindowStyle: {
 		background: window
 		titleFont: upheavtt
 	}
+	window_red: {
+		background: window_red
+		titleFont: upheavtt
+	}
 }
 }

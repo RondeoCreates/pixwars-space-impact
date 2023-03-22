@@ -30,18 +30,18 @@ public class BulletController implements Disposable {
     Bullet bullet;
     public void fire( Stage stage, float x, float y, float dirX, float dirY, boolean top ) {
         bullet = bulletPool.obtain();
-        stage.addActor( bullet );
         bullet.init( x, y, top );
+        stage.addActor( bullet );
         bullet.dirX = dirX;
         bullet.dirY = dirY;
-        activeBullets.add( bullet );
+        //activeBullets.add( bullet );
         //System.out.println( bulletPool.peak );
     }
 
     public void forceFree( Bullet item ) {
         bulletPool.free( item );
         item.dispose();
-        activeBullets.removeValue( item, false );
+        //activeBullets.removeValue( item, false );
     }
 
     @Override
