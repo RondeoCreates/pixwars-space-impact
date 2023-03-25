@@ -1,26 +1,47 @@
 
 default.png
-size: 1024, 1024
+size: 2048, 2048
 format: RGBA8888
 filter: Linear, Linear
 repeat: none
+white-pixel
+  rotate: false
+  xy: 670, 1094
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
 font
   rotate: false
-  xy: 1, 35
+  xy: 515, 975
   size: 119, 120
   orig: 119, 120
   offset: 0, 0
   index: -1
 upheavtt
   rotate: false
-  xy: 1, 157
+  xy: 1, 583
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
+upheavtt_32
+  rotate: false
+  xy: 1, 69
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+arrow
+  rotate: false
+  xy: 636, 1053
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
 button
   rotate: false
-  xy: 1, 1
+  xy: 515, 941
   size: 32, 32
   split: 14, 14, 14, 13
   orig: 32, 32
@@ -28,23 +49,47 @@ button
   index: -1
 button_down
   rotate: false
-  xy: 122, 123
+  xy: 636, 1063
   size: 32, 32
   split: 14, 14, 14, 13
   orig: 32, 32
   offset: 0, 0
   index: -1
+new_button_down
+  rotate: false
+  xy: 549, 950
+  size: 23, 23
+  split: 7, 7, 7, 7
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
+new_button_up
+  rotate: false
+  xy: 515, 916
+  size: 23, 23
+  split: 7, 7, 7, 7
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
 window
   rotate: false
-  xy: 515, 637
+  xy: 1, 35
   size: 32, 32
   split: 5, 5, 5, 5
   orig: 32, 32
   offset: 0, 0
   index: -1
+window_green
+  rotate: false
+  xy: 35, 35
+  size: 32, 32
+  split: 10, 10, 10, 10
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 window_red
   rotate: false
-  xy: 515, 603
+  xy: 1, 1
   size: 32, 32
   split: 5, 5, 5, 5
   orig: 32, 32

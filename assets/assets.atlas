@@ -20,7 +20,7 @@ bullet_blue
   index: -1
 cursor
   rotate: false
-  xy: 2, 2
+  xy: 810, 106
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -312,6 +312,13 @@ thrusters
   orig: 32, 32
   offset: 0, 0
   index: 3
+warning
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 wing
   rotate: false
   xy: 444, 19

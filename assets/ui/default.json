@@ -1,47 +1,85 @@
 {
-BitmapFont: {
-	font: {
-		file: font.fnt
-		scaledSize: -1
-		markupEnabled: true
-		flip: false
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"font": {
+		"file": "font.fnt",
+		"scaledSize": -1,
+		"markupEnabled": true,
+		"flip": false
+	},
+	"upheavtt": {
+		"file": "upheavtt.fnt",
+		"scaledSize": -1,
+		"markupEnabled": true,
+		"flip": false
+	},
+	"upheavtt_32": {
+		"file": "upheavtt_32.fnt",
+		"scaledSize": -1,
+		"markupEnabled": true,
+		"flip": false
 	}
-	upheavtt: {
-		file: upheavtt.fnt
-		scaledSize: -1
-		markupEnabled: true
-		flip: false
+},
+"com.badlogic.gdx.graphics.Color": {
+	"transparent": {
+		"r": 0,
+		"g": 0,
+		"b": 0,
+		"a": 0
 	}
-}
-LabelStyle: {
-	default: {
-		font: font
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
+	"transparent_pixel": {
+		"name": "white-pixel",
+		"color": "transparent",
+		"minWidth": 8,
+		"minHeight": 8
 	}
-	big: {
-		font: upheavtt
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
+	"default": {
+		"imageUp": "transparent_pixel",
+		"imageDown": "arrow",
+		"imageOver": "arrow",
+		"font": "font",
+		"up": "new_button_up",
+		"down": "new_button_down"
 	}
-}
-TextButtonStyle: {
-	default: {
-		font: font
-		up: button
-		down: button_down
-		over: button
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+	"default": {
+		"font": "font"
+	},
+	"big": {
+		"font": "upheavtt"
+	},
+	"big_32": {
+		"font": "upheavtt_32"
 	}
-}
-TextTooltipStyle: {
-	default: {
-		label: default
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+	"default": {
+		"font": "font",
+		"up": "new_button_up",
+		"down": "new_button_down"
 	}
-}
-WindowStyle: {
-	default: {
-		background: window
-		titleFont: upheavtt
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+	"default": {
+		"label": "default"
 	}
-	window_red: {
-		background: window_red
-		titleFont: upheavtt
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+	"default": {
+		"background": "window",
+		"titleFont": "upheavtt"
+	},
+	"window_red": {
+		"background": "window_red",
+		"titleFont": "upheavtt"
+	},
+	"window_green": {
+		"background": "window_green",
+		"titleFont": "upheavtt_32"
 	}
 }
 }
