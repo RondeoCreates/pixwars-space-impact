@@ -157,7 +157,7 @@ public class EnemyController extends Actor implements Entity, Disposable {
         deploySequence = new SequenceAction();
         choosenRegionIndex = random.nextInt( regionLength );
         choosenPatternIndex = random.nextInt( patterns_1.length );
-        for( int i = 0; i < 9; i ++ ) {
+        for( int i = 0; i < count; i ++ ) {
             deploySequence.addAction( Actions.delay( .3f ) );
             deploySequence.addAction( deployAction );
         }
@@ -165,12 +165,16 @@ public class EnemyController extends Actor implements Entity, Disposable {
     }
 
     long time;
+    int count = 0;
     @Override
     public void act( float delta ) {
         super.act(delta);
 
         if( /*activeEnemies.size*/activeEnemiesLength < 5 && !Controllers.getInstance().bossController().dead ) {
             if( System.currentTimeMillis() > time + 5000 ) {
+                if( count < 10 ) {
+                    count +=2;
+                }
                 addAction( deployShips() );
                 time = System.currentTimeMillis();
             }
